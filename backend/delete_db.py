@@ -1,7 +1,7 @@
 import sqlite3
 
 # Połącz się z bazą danych
-conn = sqlite3.connect('HoopStore.db')
+conn = sqlite3.connect('FinMate.db')
 cursor = conn.cursor()
 
 # Usuń wszystkie rekordy z tabeli
