@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Navigation from './components/Navigation';
+import '../styles/home_page.css'
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <header>
+          <img src='Logo.png' alt='Logo of my Website' />
           {showNavigation && <Navigation />} 
         </header>
           <main>{children}</main>

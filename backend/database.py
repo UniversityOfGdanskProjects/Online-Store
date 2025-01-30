@@ -1,7 +1,7 @@
 import sqlite3
 
 class Database:
-    def __init__(self, db_name = 'AskIt.db'):
+    def __init__(self, db_name = 'Hearth_And_Home.db'):
         self.db_name = db_name
         self.connection = sqlite3.connect(self.db_name, check_same_thread=False)
         self.create_tables()

@@ -53,7 +53,9 @@ const Login_Page = () => {
             const result = await response.json()
             console.log(result)
             if (result.message === 'Login successful'){
+                console.log("Zapisuję email do sessionStorage:", data.email);
                 sessionStorage.setItem('email', data.email)
+                window.dispatchEvent(new Event("storage"));
             } else {
                 console.log(result)
                 console.log("Błąd rejestracji:", result.message)
@@ -81,7 +83,9 @@ const Login_Page = () => {
             const result = await response.json()
             console.log(result)
             if (result.message === 'Login successful'){
+                console.log("Zapisuję email do sessionStorage:", data.email);
                 sessionStorage.setItem('email', data.email)
+                window.dispatchEvent(new Event("storage"));
             } else {
                 console.log(result)
                 console.log("Błąd rejestracji:", result.message)
