@@ -7,7 +7,7 @@ from backend.database import Database
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000/*"}})
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 db = Database()
 
 @app.route('/api/user/register', methods = ['PUT'])
@@ -78,8 +78,6 @@ def login_admin_to_account():
     else:
         return jsonify({'error': 'Invalid email or password'}), 401
 
-
-
 def find_admin_email(email):
     account = db.check_if_admin_email_has_an_account(email)
     if account:
@@ -93,4 +91,4 @@ def password_hashing(password):
     return hashed_password.decode('utf-8')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8000, debug=True)
