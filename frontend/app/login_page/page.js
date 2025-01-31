@@ -95,38 +95,38 @@ const Login_Page = () => {
         }
     }
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label>Chose Role</label>
-                    <div>
-                      <label>
-                        <input type="radio" value="admin" {...register("role", { required: "Role is required" })} />
+        <div className='Login_Page_Div_Page'>
+            <h1 className='login_welcome'>Login</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="login_form">
+                <div className="chose_role_div">
+                    <label className="chose_role_label">Chose Role</label>
+                    <div className="chose_role_label_div">
+                      <label className="admin_role_label">
+                        <input type="radio" value="admin" {...register("role", { required: "Role is required" })}  className="admin_role_input"/>
                         Admin
                       </label>
-                      <label>
-                        <input type="radio" value="user" {...register("role", { required: "Role is required" })} />
+                      <label className="user_role_label">
+                        <input type="radio" value="user" {...register("role", { required: "Role is required" })} className="user_role_input" />
                         User
                       </label>
                     </div>
-                    <p className='p_login' style={{ color: "red" }}>{errors.role?.message}</p>
+                    <p className='chose_role_p' style={{ color: "red" }}>{errors.role?.message}</p>
                 </div>
-                <div>
-                    <label>Email</label>
-                    <input type="email" {...register("email")} />
-                    <p className='p_login' style={{ color: "red" }}>{errors.email?.message}</p>
-                </div>
-
-                <div>
-                    <label>Password</label>
-                    <input type="password" {...register("password")} />
-                    <p style={{ color: "red" }}>{errors.password?.message}</p>
+                <div className="email_div">
+                    <label className="email_label">Email</label>
+                    <input type="email" {...register("email")} className="email_input"/>
+                    <p className='email_p' style={{ color: "red" }}>{errors.email?.message}</p>
                 </div>
 
-                <div>
-                    <button type="submit">Login</button>
-                    <button type="button" onClick={() => router.push('/')}>Go Back</button>
+                <div className="password_div">
+                    <label className="password_label">Password</label>
+                    <input type="password" {...register("password")} className="password_input"/>
+                    <p style={{ color: "red" }} className="password_p">{errors.password?.message}</p>
+                </div>
+
+                <div className="button_layout_login">
+                    <button type="submit" className="login_button">Login</button>
+                    <button type="button" onClick={() => router.push('/')} className="go_back_button">Go Back</button>
                 </div>
             </form>
         </div>

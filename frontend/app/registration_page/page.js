@@ -53,43 +53,43 @@ const Registration_Page = () => {
     }
 
     return (
-        <div>
-            <h1>Sing Up</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label>First Name</label>
-                    <input type='text' {...register("first_name")} />
-                    <p style={{ color: "red" }}>{errors.first_name?.message}</p>
+        <div className='Registration_Page_Div_Page'>
+            <h1 className='register_welcome'>Sing Up</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className='register_form'>
+                <div className='first_name_div'>
+                    <label className='first_name_label'>First Name</label>
+                    <input type='text' {...register("first_name")}  className='frist_name_input'/>
+                    <p style={{ color: "red" }} className='frist_name_p'>{errors.first_name?.message}</p>
                 </div>
 
-                <div>
-                    <label>Last Name</label>
-                    <input type='text' {...register("last_name")} />
-                    <p style={{ color: "red" }}>{errors.last_name?.message}</p>
+                <div className='last_name_div'>
+                    <label className='last_name_label'>Last Name</label>
+                    <input type='text' {...register("last_name")} className='last_name_input'/>
+                    <p style={{ color: "red" }} className='last_name_p'>{errors.last_name?.message}</p>
                 </div>
 
-                <div>
-                    <label>Email</label>
-                    <input type="email" {...register("email")} />
-                    <p style={{ color: "red" }}>{errors.email?.message}</p>
+                <div className='email_name_div'>
+                    <label className='email_name_label'>Email</label>
+                    <input type="email" {...register("email")} className='email_name_input'/>
+                    <p style={{ color: "red" }} className='email_name_p'>{errors.email?.message}</p>
+                </div >
+
+                <div className='password_name_div'>
+                    <label className='password_name_label'>Password</label>
+                    <input type="password" {...register("password")} className='password_name_input'/>
+                    <p style={{ color: "red" }} className='password_name_p'>{errors.password?.message}</p>
                 </div>
 
-                <div>
-                    <label>Password</label>
-                    <input type="password" {...register("password")} />
-                    <p style={{ color: "red" }}>{errors.password?.message}</p>
+                <div className='repet_password_name_div'>
+                    <label className='repet_password_name_label'>Repet Password</label>
+                    <input type="password" {...register("confirmPassword")} className='repet_password_name_input'/>
+                    <p style={{ color: "red" }} className='repet_password_name_p'>{errors.confirmPassword?.message}</p>
                 </div>
 
-                <div>
-                    <label>Repet Password</label>
-                    <input type="password" {...register("confirmPassword")} />
-                    <p style={{ color: "red" }}>{errors.confirmPassword?.message}</p>
-                </div>
-
-                <div>
-                    <button type="submit">Sing Up</button>
+                <div className='button_layout_registration'>
+                    <button type="submit" className='sing_up_button'>Sing Up</button>
                     <Link href='/'>
-                        <button>Go Back</button>
+                        <button className='go_back_button'>Go Back</button>
                     </Link>
                 </div>
             </form>
