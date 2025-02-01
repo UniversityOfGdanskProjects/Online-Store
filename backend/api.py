@@ -90,5 +90,32 @@ def password_hashing(password):
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
     return hashed_password.decode('utf-8')
 
+@app.route('/api/admin/category', methods = ['POST'])
+def add_category():
+    data = request.get_json()
+    if data.get('parent_id') != None:
+        parent = int(data.get('parent_id'))
+        print(parent)
+    else:
+        parent = data.get('parent_id')
+
+    if db.check_if_category_exist(data.get('name')) is not None:
+        return jsonify({'error': 'Category Already Exists'}), 400
+    
+    if parent == None:
+        db.add_category(data.get('name'))
+        return jsonify({'message': 'Category Added Sucessfuly'}), 200
+    else:
+        if not db.check_if_parent_exist(parent):
+            return jsonify({'error': "Category Dosen't Exists"}), 400
+        db.add_category(data.get('name'), parent)
+        return jsonify({'message': 'Category Added Sucessfuly'}), 200
+    
+@app.route('/api/admin/get/category', methods = ['GET'])
+def get_category():
+    result = db.get_category_id()
+    categories = [{"id": cat[0], "name": cat[1], "parent_id": cat[2]} for cat in result]
+    return jsonify(categories), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

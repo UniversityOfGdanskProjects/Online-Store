@@ -7,7 +7,6 @@ function Navigation() {
     const router = useRouter();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const email = sessionStorage.getItem('email');
 
     useEffect(() => {
         const checkLoginStatus = () => {
@@ -29,10 +28,16 @@ function Navigation() {
     return (
         <nav>
             <ul className='navigation'>
+                <li>
+                    <Link href="/add_product">Add Product</Link>
+                </li>
+                <li>
+                    <Link href="/add_category">Add Category</Link>
+                </li>
                 {!isLoggedIn ? (
                     <li>
                         <div className='login_registration_buttons'>
-                            <Link href="/login_page"><button className='login_button'>Login</button></Link>
+                            <Link href="/login_page"><button className='login_button_hp'>Login</button></Link>
                             <Link href='/registration_page'><button className='register_button'>Sign Up</button></Link>
                         </div>
                     </li>

@@ -28,14 +28,18 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 40px;
 }
   
 nav ul li a {
-    font-size: 25px;
+    font-size: 18px;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
+    color: #a54912;
+
 }
   
 nav ul li a:hover {
@@ -50,7 +54,7 @@ nav ul li a:hover {
     align-items: center;
 }
 
-.login_button{
+.login_button_hp{
     width: 70px;
     background-color: #f4ebe5;
     border: 2px solid #a54912;
@@ -59,7 +63,7 @@ nav ul li a:hover {
     font-size: 13px;
 }
 
-.login_button:hover{
+.login_button_hp:hover{
     background-color: #a54912;
     border: 2px solid #f4ebe5;
     color: #f4ebe5;

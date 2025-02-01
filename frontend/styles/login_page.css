@@ -123,7 +123,8 @@
     grid-row: 1;
     grid-column: 2;
     height: 25px;
-    width: 200px;
+    width: 230px;
+    margin-left: 30px;
 }
 
 .email_p{
@@ -157,7 +158,8 @@
     grid-row: 1;
     grid-column: 2;
     height: 25px;
-    width: 200px;
+    width: 230px;
+    margin-left: 30px;
 }
 
 .password_p{

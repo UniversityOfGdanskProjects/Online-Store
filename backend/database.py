@@ -124,6 +124,40 @@ class Database:
         cursor.execute("SELECT password FROM admin WHERE email=?", (email,))
         result = cursor.fetchall()
         return result[0] if result else None
+    
+    def check_if_category_exist(self, category):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT name FROM categories WHERE name = ?", (category, ))
+        result = cursor.fetchall()
+        return result[0] if result else None
+    
+    def check_if_parent_exist(self, parent_id):
+        cursor = self.connection.cursor()
+        print(parent_id)
+        print(self.get_category_id())
+        cursor.execute("SELECT id FROM categories WHERE id = ?", (parent_id, ))
+        result = cursor.fetchall()
+        print(len(result))
+        return len(result) > 0
+        
+    def add_category(self, name, parent_id = None):
+        if parent_id == None:
+            cursor = self.connection.cursor()
+            cursor.execute("INSERT INTO categories (name) VALUES(?)", (name,))
+            self.connection.commit()
+            print(parent_id)
+            print(f'Dodano Kategorie {name}.')
+        else:
+            cursor = self.connection.cursor()
+            cursor.execute("INSERT INTO categories (name, parent_id) VALUES(?,?)", (name, parent_id))
+            self.connection.commit()
+            print(f'Dodano Podkategorie {name}, Id Rodzica {parent_id}')
+        
+    def get_category_id(self,):
+        curosr = self.connection.cursor()
+        curosr.execute("SELECT * FROM categories")
+        result = curosr.fetchall()
+        return result
 
     
 if __name__ == "__main__":
