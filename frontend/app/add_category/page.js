@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import * as yup from "yup"
 import { Formik, Field, Form } from "formik";
+import Link from 'next/link'
 
 const schema = yup.object().shape({
     name: yup.string().required("Category name is required"),
@@ -99,6 +100,9 @@ const AddCategoryPage = () => {
 
                         <div className="button_layout_add_category">
                             <button type="submit" className="add_category_button">Add Category</button>
+                            <Link href="category_list">
+                                <button className="category_list_button">Go To List</button>
+                            </Link>
                         </div>
                     </Form>
                 )}

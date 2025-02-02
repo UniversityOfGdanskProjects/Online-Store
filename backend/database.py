@@ -133,11 +133,8 @@ class Database:
     
     def check_if_parent_exist(self, parent_id):
         cursor = self.connection.cursor()
-        print(parent_id)
-        print(self.get_category_id())
         cursor.execute("SELECT id FROM categories WHERE id = ?", (parent_id, ))
         result = cursor.fetchall()
-        print(len(result))
         return len(result) > 0
         
     def add_category(self, name, parent_id = None):
@@ -153,11 +150,31 @@ class Database:
             self.connection.commit()
             print(f'Dodano Podkategorie {name}, Id Rodzica {parent_id}')
         
-    def get_category_id(self,):
+    def get_all_category(self,):
         curosr = self.connection.cursor()
         curosr.execute("SELECT * FROM categories")
         result = curosr.fetchall()
         return result
+    
+    def get_category_by_id(self, category_id):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT * FROM categories WHERE id = ?', (category_id, ))
+        result = cursor.fetchall()
+        if not result:
+            return None 
+        
+        transaction = {
+            'id': result[0][0], 
+            'name': result[0][1],
+            'parent_id': result[0][2],
+        }
+        
+        return transaction
+    
+    def delete_category(self, category_id):
+        cursor = self.connection.cursor()
+        cursor.execute('DELETE FROM categories WHERE id = ?', (category_id, ))
+        self.connection.commit()
 
     
 if __name__ == "__main__":

@@ -99,7 +99,7 @@
 .button_layout_add_category{
     grid-row: 3;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -110,12 +110,29 @@
     font-size: 20px;
     text-decoration: none;
     color: #a54912;
-    width: 200px;
-    height: 70px;
+    width: 180px;
+    height: 50px;
 }
 
 .add_category_button:hover{
     background-color: #a54912;
     border: 2px solid #f4ebe5;
     color: #f4ebe5;
+}
+
+.category_list_button{
+    background-color: #a54912;
+    border: 2px solid #f4ebe5;
+    border-radius: 15px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #f4ebe5;
+    width: 180px;
+    height: 50px;
+}
+
+.category_list_button:hover{
+    background-color: #f4ebe5;
+    border: 2px solid #a54912;
+    color: #a54912;
 }

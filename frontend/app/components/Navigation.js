@@ -34,6 +34,9 @@ function Navigation() {
                 <li>
                     <Link href="/add_category">Add Category</Link>
                 </li>
+                <li>
+                    <Link href="/category_list">Category List</Link>
+                </li>
                 {!isLoggedIn ? (
                     <li>
                         <div className='login_registration_buttons'>

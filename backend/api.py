@@ -113,9 +113,19 @@ def add_category():
     
 @app.route('/api/admin/get/category', methods = ['GET'])
 def get_category():
-    result = db.get_category_id()
+    result = db.get_all_category()
     categories = [{"id": cat[0], "name": cat[1], "parent_id": cat[2]} for cat in result]
     return jsonify(categories), 200
+
+@app.route('/api/admin/category/<category_id>', methods = ['DELETE'])
+def delete_category(category_id):
+    category = db.get_category_by_id(category_id)
+
+    if not category:
+        return jsonify({'error': 'Category not found.'}), 404
+    
+    db.delete_category(category_id)
+    return jsonify({'message': 'Category deleted successfully.'}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
