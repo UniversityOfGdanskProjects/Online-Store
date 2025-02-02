@@ -150,5 +150,25 @@ def get_category_by_id(category_id):
     else:
         return jsonify({'error': 'Category not found'}), 404
 
+@app.route('/api/admin/product', methods = ['POST'])
+def add_product():
+    data = request.get_json()
+    if data.get('category_id') != None:
+        category = int(data.get('category_id'))
+        print(category)
+    else:
+        category = data.get('category_id')
+
+    if not db.check_if_parent_exist(category):
+        return jsonify({'error': "Category Dosen't Exists"}), 400
+    db.add_product(data.get('name'), data.get('description'), data.get('price'), data.get("stock"), category, data.get('image_url'), data.get('created_at'))
+    return jsonify({'message': 'Product Added Sucessfuly'}), 200
+
+@app.route('/api/admin/get/product', methods = ['GET'])
+def get_all_products():
+    result = db.get_all_products()
+    products = [{"id": cat[0], "name": cat[1], "description": cat[2], "price": cat[3], "stock": cat[4], "category_id": cat[5], "image_url": cat[6], "created_at": cat[7]} for cat in result]
+    return jsonify(products), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

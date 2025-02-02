@@ -47,6 +47,9 @@ function Navigation() {
                             <Link href="/add_product">Add Product</Link>
                         </li>
                         <li>
+                            <Link href="/product_list">Product List</Link>
+                        </li>
+                        <li>
                             <Link href="/add_category">Add Category</Link>
                         </li>
                         <li>

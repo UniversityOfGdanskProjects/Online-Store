@@ -33,7 +33,7 @@ class Database:
                        stock INTEGER NOT NULL,
                        category_id INTEGER,
                        image_url TEXT,
-                       created_atTIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        FOREIGN KEY (category_id) REFERENCES categoriues(id)
                     )''')
         
@@ -182,6 +182,17 @@ class Database:
         self.connection.commit()
         print(f'Zmodyfikowano transakcje {category_id}.')
 
+    def add_product(self, name, description, price, stock, category_id, image_url, created_at):
+        cursor = self.connection.cursor()
+        cursor.execute("INSERT INTO products (name, description, price, stock, category_id, image_url, created_at) VALUES(?, ?, ?, ?, ?, ?, ?)", (name, description, price, stock, category_id, image_url, created_at))
+        self.connection.commit()
+        print(f'Product Added.')
+
+    def get_all_products(self,):
+        curosr = self.connection.cursor()
+        curosr.execute("SELECT * FROM products")
+        result = curosr.fetchall()
+        return result
     
 if __name__ == "__main__":
     db = Database()
