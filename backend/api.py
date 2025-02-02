@@ -170,5 +170,34 @@ def get_all_products():
     products = [{"id": cat[0], "name": cat[1], "description": cat[2], "price": cat[3], "stock": cat[4], "category_id": cat[5], "image_url": cat[6], "created_at": cat[7]} for cat in result]
     return jsonify(products), 200
 
+@app.route('/api/admin/product/<product_id>', methods = ['DELETE'])
+def delete_product(product_id):
+    product = db.get_product_by_id(product_id)
+
+    if not product:
+        return jsonify({'error': 'Product not found.'}), 404
+    
+    db.delete_product(product_id)
+    return jsonify({'message': 'Product deleted successfully.'}), 200
+
+@app.route('/api/admin/product/<product_id>', methods = ['PUT'])
+def update_product(product_id):
+    data = request.get_json()
+
+    category = int(data.get('category_id'))
+    print(category)
+
+    db.update_product(product_id, data.get('name'), data.get('description'), data.get('price'), data.get("stock"), category, data.get('image_url'), data.get('created_at'))
+
+    return jsonify({'message': 'Product updated'}), 200
+
+@app.route('/api/admin/product/<product_id>', methods = ['GET'])
+def get_product_by_id(product_id):
+    product = db.get_product_by_id(product_id)
+
+    if product:
+        return jsonify(product), 200
+    else:
+        return jsonify({'error': 'Product not found'}), 404
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

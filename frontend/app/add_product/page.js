@@ -22,7 +22,7 @@ const AddProductPage = () => {
         try{
             const payload = {
                 name: data.name,
-                descriptors: data.description,
+                description: data.description,
                 price: data.price,
                 stock: data.stock,
                 category_id: data.category,
@@ -125,6 +125,7 @@ const AddProductPage = () => {
                                 name="category"
                                 onChange={(e) => setFieldValue("category", e.target.value)}
                             >
+                                <option value="">Chose Category</option>
                                 {allCategories.map(category => (
                                     <option key={category.id} value={category.id}>
                                         {category.name}

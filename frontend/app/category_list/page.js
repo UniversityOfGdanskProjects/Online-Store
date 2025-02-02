@@ -86,10 +86,10 @@ const CategoryList = () => {
                     ))}
                 </ul>
                 <div className='button_div'>
-                <Link href='/add_category'>
-                    <button className='add_button'>+</button>
-                </Link>
-            </div>
+                    <Link href='/add_category'>
+                        <button className='add_button'>+</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

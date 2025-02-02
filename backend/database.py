@@ -163,13 +163,13 @@ class Database:
         if not result:
             return None 
         
-        transaction = {
+        category = {
             'id': result[0][0], 
             'name': result[0][1],
             'parent_id': result[0][2],
         }
         
-        return transaction
+        return category
     
     def delete_category(self, category_id):
         cursor = self.connection.cursor()
@@ -188,11 +188,42 @@ class Database:
         self.connection.commit()
         print(f'Product Added.')
 
-    def get_all_products(self,):
+    def get_all_products(self):
         curosr = self.connection.cursor()
         curosr.execute("SELECT * FROM products")
         result = curosr.fetchall()
         return result
+    
+    def get_product_by_id(self, product_id):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT * FROM products WHERE id = ?', (product_id, ))
+        result = cursor.fetchall()
+        if not result:
+            return None 
+        
+        product = {
+            'id': result[0][0], 
+            'name': result[0][1],
+            'description': result[0][2],
+            'price': result[0][3],
+            'stock': result[0][4],
+            'category_id': result[0][5],
+            'image_url': result[0][6],
+            'created_at': result[0][7]
+        }
+        
+        return product
+    
+    def delete_product(self, profuct_id):
+        cursor = self.connection.cursor()
+        cursor.execute('DELETE FROM products WHERE id = ?', (profuct_id, ))
+        self.connection.commit()
+
+    def update_product(self, product_id, name, description, price, stock, category_id, image_url, created_at):
+        cursor = self.connection.cursor()
+        cursor.execute("UPDATE products SET name = ?, description = ?, price = ?, stock = ?, category_id = ?, image_url = ?, created_at = ? WHERE id = ?", (name, description, price, stock, category_id, image_url, created_at, product_id))
+        self.connection.commit()
+        print(f'Modify product {product_id}.')
     
 if __name__ == "__main__":
     db = Database()
