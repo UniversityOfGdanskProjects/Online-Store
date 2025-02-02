@@ -27,15 +27,15 @@ const Login_Page = () => {
     const onSubmit = (data) => {
         const {role, ...filteredData} = data
         if (role === "user"){
-            SendJsonToApiUser(filteredData)
+            SendJsonToApiUser(filteredData, role)
             router.push('/')
         } else if (role === "admin") {
-            SendJsonToApiAdmin(filteredData)
+            SendJsonToApiAdmin(filteredData, role)
             router.push('/admin_home_page')
         }
     }
 
-    async function SendJsonToApiUser(data) {
+    async function SendJsonToApiUser(data, role) {
         console.log("Sending data:", data)
 
         try{
@@ -55,6 +55,7 @@ const Login_Page = () => {
             if (result.message === 'Login successful'){
                 console.log("Zapisuję email do sessionStorage:", data.email);
                 sessionStorage.setItem('email', data.email)
+                sessionStorage.setItem('role', role)
                 window.dispatchEvent(new Event("storage"));
             } else {
                 console.log(result)
@@ -65,7 +66,7 @@ const Login_Page = () => {
         }
     }
 
-    async function SendJsonToApiAdmin(data) {
+    async function SendJsonToApiAdmin(data, role) {
         console.log("Sending data:", data)
 
         try{
@@ -85,6 +86,7 @@ const Login_Page = () => {
             if (result.message === 'Login successful'){
                 console.log("Zapisuję email do sessionStorage:", data.email);
                 sessionStorage.setItem('email', data.email)
+                sessionStorage.setItem('role', role)
                 window.dispatchEvent(new Event("storage"));
             } else {
                 console.log(result)

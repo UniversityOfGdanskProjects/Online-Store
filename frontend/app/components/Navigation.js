@@ -7,36 +7,53 @@ function Navigation() {
     const router = useRouter();
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [role, setRole] = useState(null);
 
     useEffect(() => {
         const checkLoginStatus = () => {
             const email = sessionStorage.getItem('email');
             setIsLoggedIn(!!email);
         };
-        checkLoginStatus();
-        window.addEventListener('storage', checkLoginStatus);
+
+        const checkRole = () => {
+            const userRole = sessionStorage.getItem('role');
+            setRole(userRole);
+        };
+
+        const handleStorageChange = () => {
+            checkLoginStatus();
+            checkRole();
+        };
+
+        window.addEventListener('storage', handleStorageChange);
         return () => {
-            window.removeEventListener('storage', checkLoginStatus);
+            window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
 
     const handleLogout = () => {
         sessionStorage.removeItem('email');
+        sessionStorage.removeItem('role');
         setIsLoggedIn(false)
+        setRole(null);
         router.push('/');
     }
     return (
         <nav>
             <ul className='navigation'>
-                <li>
-                    <Link href="/add_product">Add Product</Link>
-                </li>
-                <li>
-                    <Link href="/add_category">Add Category</Link>
-                </li>
-                <li>
-                    <Link href="/category_list">Category List</Link>
-                </li>
+                {role === 'admin' && (
+                    <>
+                        <li>
+                            <Link href="/add_product">Add Product</Link>
+                        </li>
+                        <li>
+                            <Link href="/add_category">Add Category</Link>
+                        </li>
+                        <li>
+                            <Link href="/category_list">Category List</Link>
+                        </li>
+                    </>
+                )}
                 {!isLoggedIn ? (
                     <li>
                         <div className='login_registration_buttons'>
