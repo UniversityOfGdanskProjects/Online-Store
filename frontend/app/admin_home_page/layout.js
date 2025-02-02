@@ -1,6 +1,6 @@
 'use client'
 
-export default function LoginLayout({ children }) {
+export default function AdimHomeLayout({ children }) {
     return (
       <div>
         <section>

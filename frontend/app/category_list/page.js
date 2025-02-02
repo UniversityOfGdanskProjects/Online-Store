@@ -24,7 +24,7 @@ const CategoryList = () => {
         fetchAllCategories()
     }, [])
 
-     const getParentName = (parentId) => {
+    const getParentName = (parentId) => {
         const parentName = allCategories.find(category => category.id === parentId)
         return parentName ? parentName.name : null
     }
@@ -78,7 +78,7 @@ const CategoryList = () => {
                             <p>{getParentName(category.parent_id)}</p>
                             <div className="actions">
                             <button onClick={() => handleDelete(category.id, category.parentId)}>Delete</button>
-                            <Link href='/category_list'>
+                            <Link href={`/category_list/${category.id}`}>
                                 <button>Edit</button>
                             </Link>
                         </div>

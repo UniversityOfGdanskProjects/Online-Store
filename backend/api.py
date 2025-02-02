@@ -127,5 +127,28 @@ def delete_category(category_id):
     db.delete_category(category_id)
     return jsonify({'message': 'Category deleted successfully.'}), 200
 
+@app.route('/api/admin/category/<category_id>', methods = ['PUT'])
+def update_category(category_id):
+    data = request.get_json()
+
+    if data.get('parent_id') != None:
+        parent = int(data.get('parent_id'))
+        print(parent)
+    else:
+        parent = data.get('parent_id')
+
+    db.update_category(category_id, data.get('name'), parent)
+
+    return jsonify({'message': 'Category updated'}), 200
+
+@app.route('/api/admin/category/<category_id>', methods = ['GET'])
+def get_category_by_id(category_id):
+    category = db.get_category_by_id(category_id)
+
+    if category:
+        return jsonify(category), 200
+    else:
+        return jsonify({'error': 'Category not found'}), 404
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

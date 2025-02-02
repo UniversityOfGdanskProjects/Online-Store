@@ -176,6 +176,12 @@ class Database:
         cursor.execute('DELETE FROM categories WHERE id = ?', (category_id, ))
         self.connection.commit()
 
+    def update_category(self, category_id, name, parent_id):
+        cursor = self.connection.cursor()
+        cursor.execute("UPDATE categories SET name = ?, parent_id = ? WHERE id = ?", (name, parent_id, category_id))
+        self.connection.commit()
+        print(f'Zmodyfikowano transakcje {category_id}.')
+
     
 if __name__ == "__main__":
     db = Database()
