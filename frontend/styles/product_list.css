@@ -13,7 +13,7 @@
     border-radius: 25px;
     background-color: #dbb7a6;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-    width: 1000px;
+    width: 1200px;
     height: auto;
     margin-top: 100px;
 }
@@ -43,6 +43,7 @@
 .product_table .product_header{
     display: grid;
     grid-template-columns: 1fr 2fr repeat(5, 1fr) 1.1fr;
+    gap: 30px;
     background-color: #f4ebe5;
     font-weight: bold;
     text-align: left;
@@ -53,6 +54,7 @@
 .product_table .table_row{
     display: grid;
     grid-template-columns: 1fr 2fr repeat(5, 1fr) 0.8fr;
+    gap: 30px;
     padding: 10px;
     border-bottom: 1px solid #f4ebe5;
     align-items: center;

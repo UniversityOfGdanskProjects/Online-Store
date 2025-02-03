@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Navigation from './components/Navigation';
 import CategoriesMenu from './components/CategoriesMenu';
+import ProductList from './components/ProductListAll';
 import '../styles/home_page.css'
 
 export default function RootLayout({ children }) {
@@ -27,7 +28,12 @@ export default function RootLayout({ children }) {
             <CategoriesMenu />
           </header>
         }
-          <main>{children}</main>
+          <main>
+            {children}
+            <div className='product_list_layout_hp'>
+              <ProductList/>
+            </div>
+          </main>
       </body>
     </html>
   );
