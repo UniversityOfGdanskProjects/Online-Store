@@ -100,6 +100,18 @@ class Database:
         cursor.execute('SELECT email FROM users WHERE email = ?', (email,))
         result = cursor.fetchall()
         return result[0] if result else None
+    
+    def get_user_id(self, email):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT id FROM users WHERE email = ?', (email, ))
+        result = cursor.fetchone()
+        return result[0] if result else None
+    
+    def get_user_name(self, user_id):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT first_name FROM users WHERE id = ?', (user_id, ))
+        result = cursor.fetchone()
+        return result[0] if result else None
 
     def add_admin(self, email: str, password: str):
         cursor = self.connection.cursor()
@@ -226,13 +238,27 @@ class Database:
         print(f'Modify product {product_id}.')
 
     def add_opinion(self, user_id, product_id, rating, comment, created_at):
-        pass
+        cursor = self.connection.cursor()
+        cursor.execute("INSERT INTO reviews (user_id, product_id, rating, comment, created_at) VALUES(?, ?, ?, ?, ?)", (user_id, product_id, rating, comment, created_at))
+        self.connection.commit()
+        print(f'Review Added.')
 
-    def get_ratin_by_product(self, product_id): 
-        pass
+    def get_rating_by_product(self, product_id): 
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT rating FROM reviews WHERE product_id = ?", (product_id, ))
+        result = cursor.fetchall()
+
+        if not result:
+            return None
+        
+        total = sum(rating[0] for rating in result)
+        return total/len(result)
 
     def get_all_opinions_by_product(self, product_id):
-        pass
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT user_id, rating, comment FROM reviews WHERE product_id = ?", (product_id, ))
+        result = cursor.fetchall()
+        return result if result else []
     
 if __name__ == "__main__":
     db = Database()

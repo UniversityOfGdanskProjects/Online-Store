@@ -16,9 +16,14 @@ export default function RootLayout({ children }) {
   const [sortOrder, setSortOrder] = useState("");
 
   const hiddenNavigationPaths = ['/login_page', '/registration_page'];
-  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product/[id]']
+  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product/[id]', '/product_list/[id]', '/category_list/[id]']
 
-  const showMenu = !hiddenCategoryMenu.some(path => pathname.startsWith('/product/') || pathname === path);
+  const showMenu = !hiddenCategoryMenu.some(path => 
+    pathname.startsWith('/product/') || 
+    pathname.startsWith('/category_list/') || 
+    pathname.startsWith('/product_list/') || 
+    pathname === path
+  );
   const showNavigation = !hiddenNavigationPaths.includes(pathname);
   
   return (

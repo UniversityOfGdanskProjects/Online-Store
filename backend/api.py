@@ -1,9 +1,8 @@
 import bcrypt
-import os
-import logging
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from backend.database import Database
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -199,5 +198,52 @@ def get_product_by_id(product_id):
         return jsonify(product), 200
     else:
         return jsonify({'error': 'Product not found'}), 404
+    
+@app.route('/api/user/product/add/review/<product_id>', methods = ['POST'])
+def add_review(product_id):
+    data = request.get_json()
+    user_email = data.get('user_email')
+
+    if not find_user_email(user_email):
+        return jsonify({'error': f"Account with {user_email} doesn't exist."}), 409
+
+    
+    user_id = db.get_user_id(user_email)
+    if user_id is None:
+        return jsonify({'error': 'User not found.'}), 404
+
+    current_date = datetime.now().strftime("%Y-%m-%d")
+
+    db.add_opinion(user_id, product_id, int(data.get('rating')), data.get('comment'), current_date)
+    return jsonify({'message': 'Opinion Added.'}), 200
+
+@app.route('/api/user/product/get/rating/<product_id>', methods = ['GET'])
+def get_rating_for_product(product_id):
+    result = db.get_rating_by_product(product_id)
+
+    if result is None:
+        return jsonify({'message': 'No ratings for this product'}), 404
+    
+    return jsonify(result), 200
+
+@app.route('/api/user/product/get/opinions/<product_id>', methods=['GET'])
+def get_all_opinions_for_product(product_id):
+    data = db.get_all_opinions_by_product(product_id)
+    if not data:
+        return jsonify({'message': 'No opinions for this product'}), 404
+
+    result = []
+    for line in data:
+        user_name = db.get_user_name(line[0])
+        result.append({
+            'user_name': user_name,
+            'comment': line[2],
+            'rating': line[1]
+        })
+    
+    return jsonify(result), 200
+
+    
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
