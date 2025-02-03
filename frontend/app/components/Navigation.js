@@ -10,19 +10,20 @@ function Navigation() {
     const [role, setRole] = useState(null);
 
     useEffect(() => {
-        const checkLoginStatus = () => {
-            const email = sessionStorage.getItem('email');
-            setIsLoggedIn(!!email);
-        };
+        const email = sessionStorage.getItem('email');
+        const userRole = sessionStorage.getItem('role');
 
-        const checkRole = () => {
-            const userRole = sessionStorage.getItem('role');
+        if (email) {
+            setIsLoggedIn(true);
             setRole(userRole);
-        };
+        }
 
         const handleStorageChange = () => {
-            checkLoginStatus();
-            checkRole();
+            const email = sessionStorage.getItem('email');
+            const userRole = sessionStorage.getItem('role');
+
+            setIsLoggedIn(!!email);
+            setRole(userRole);
         };
 
         window.addEventListener('storage', handleStorageChange);
@@ -34,10 +35,11 @@ function Navigation() {
     const handleLogout = () => {
         sessionStorage.removeItem('email');
         sessionStorage.removeItem('role');
-        setIsLoggedIn(false)
+        setIsLoggedIn(false);
         setRole(null);
         router.push('/');
     }
+
     return (
         <nav>
             <ul className='navigation'>

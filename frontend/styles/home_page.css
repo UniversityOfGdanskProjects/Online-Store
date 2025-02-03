@@ -9,7 +9,7 @@ header{
     align-items: center;
     background-color: #dbb7a6;
     border: 1px solid #dbb7a6;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3); */
 }
 img{
     height: 50px;
@@ -61,6 +61,7 @@ nav ul li a:hover {
     color: #a54912;
     border-radius: 5px;
     font-size: 13px;
+    transition: all 0.3s ease-in-out;
 }
 
 .login_button_hp:hover{
@@ -76,6 +77,7 @@ nav ul li a:hover {
     color: #a54912;
     border-radius: 5px;
     font-size: 13px;
+    transition: all 0.3s ease-in-out;
 }
 
 .register_button:hover{
@@ -99,10 +101,71 @@ nav ul li a:hover {
     color: #a54912;
     border-radius: 5px;
     font-size: 13px;
+    transition: all 0.3s ease-in-out; 
 }
 
 .home_page_sign_out_button:hover{
     background-color: #a54912;
     border: 2px solid #f4ebe5;
     color: #f4ebe5;
+}
+
+.menu_header{
+    background-color: #dbb7a68c;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    height: auto;
+}
+
+.Category_Menu_Div {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-left: 30px;
+}
+
+.Category_Menu_Div button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #dbb7a68c;
+    background-color: #dbb7a68c;
+    color: #a54912;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.Category_Menu_Div button:hover {
+    background-color: #f4ebe5;
+    color: #dbb7a68c;
+    border-color: #f4ebe5;
+}
+
+.Category_Menu_Div button.active {
+    background-color: #f4ebe5;
+    color: #dbb7a68c;
+    border-color: #f4ebe5;
+}
+
+.mt-4 ul {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+.mt-4 ul button {
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: 1px solid #dbb7a68c;
+    background-color: #dbb7a68c;
+    color: #a54912;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.mt-4 ul button:hover {
+    background-color: #f4ebe5;
+    color: #dbb7a68c;
+    border-color: #f4ebe5;
 }

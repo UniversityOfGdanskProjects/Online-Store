@@ -76,6 +76,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
+    transition: all 0.3s ease-in-out;
 }
 
 .product_table button:hover{
@@ -109,6 +110,7 @@
     text-decoration: none;
     color: #a54912;
     margin: 5px;
+    transition: all 0.3s ease-in-out;
 }
 
 .add_button:hover{

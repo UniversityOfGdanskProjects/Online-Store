@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation"
 import { useParams } from 'next/navigation';
 import { Formik, Field, Form } from 'formik';
 import * as yup from 'yup';
-import Link from "next/link";
 
 const schema = yup.object().shape({
     name: yup.string().required("Product name is required"),

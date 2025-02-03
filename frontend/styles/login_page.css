@@ -186,6 +186,7 @@
     color: #a54912;
     width: 200px;
     height: 70px;
+    transition: all 0.3s ease-in-out;
 }
 
 .login_button:hover{
@@ -203,6 +204,7 @@
     color: #f4ebe5;
     width: 200px;
     height: 70px;
+    transition: all 0.3s ease-in-out;
 }
 
 .go_back_button:hover{

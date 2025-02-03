@@ -298,6 +298,7 @@
     color: #a54912;
     width: 200px;
     height: 60px;
+    transition: all 0.3s ease-in-out;
 }
 
 .add_product_button:hover{
@@ -315,6 +316,7 @@
     color: #f4ebe5;
     width: 200px;
     height: 60px;
+    transition: all 0.3s ease-in-out;
 }
 
 .product_list_button:hover{
