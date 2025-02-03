@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const ProductList = ({ searchQuery, selectedCategory }) => {
     const [products, setProducts] = useState([])
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -29,11 +31,15 @@ const ProductList = ({ searchQuery, selectedCategory }) => {
         <div className="p-4">
           <div className="product_list_div">
             {filteredProducts.map((product) => (
-              <div key={product.id} className="product">
+              <div 
+                key={product.id} 
+                className="product" 
+                onClick={() => router.push(`/product/${product.id}`)} 
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={product.image_url || "/placeholder.jpg"}
                   className="product_img"
-                  alt={product.name}
                 />
                 <div className="sapn_layout">
                   <span className="product_name_list">{product.name}</span>

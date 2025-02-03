@@ -13,9 +13,9 @@ export default function RootLayout({ children }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const hiddenNavigationPaths = ['/login_page', '/registration_page'];
-  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page']
+  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product/[id]']
 
-  const showMenu = !hiddenCategoryMenu.includes(pathname)
+  const showMenu = !hiddenCategoryMenu.some(path => pathname.startsWith('/product/') || pathname === path);
   const showNavigation = !hiddenNavigationPaths.includes(pathname);
   
   return (
