@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProductList = ({ searchQuery }) => {
+const ProductList = ({ searchQuery, selectedCategory }) => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -19,9 +19,10 @@ const ProductList = ({ searchQuery }) => {
         fetchProducts()
     }, [])
 
-    const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedCategory === null || product.category_id === selectedCategory)
+    )
     
 
       return (

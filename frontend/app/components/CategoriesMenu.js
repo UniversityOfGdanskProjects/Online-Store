@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 
-export default function CategoriesMenu(){
+export default function CategoriesMenu({ setSelectedCategory }){
     const [categories, setCategories] = useState([])
     const [activeParent, setActiveParent] = useState(null)
     const [role, setRole] = useState(null);
@@ -53,10 +53,19 @@ export default function CategoriesMenu(){
             {role !== 'admin' && (
                 <>
                     <div className="Category_Menu_Div">
+                        <button 
+                            onClick={() => setSelectedCategory(null)}
+                            className="px-4 py-2 border rounded bg-gray-200"
+                        >
+                            Wszystkie produkty
+                        </button>
                         {parentCategories.map((category) => (
                             <button
                                 key={category.id}
-                                onClick={() => setActiveParent(category.id === activeParent ? null : category.id)}
+                                onClick={() => {
+                                    setActiveParent(category.id === activeParent ? null : category.id);
+                                    setSelectedCategory(category.id);
+                                }}
                                 className={`px-4 py-2 border rounded ${activeParent === category.id ? "bg-blue-500 text-white" : "bg-gray-200"}`}
                             >
                                 {category.name}
@@ -67,7 +76,12 @@ export default function CategoriesMenu(){
                         <div className="mt-4">
                         <ul className="list-disc pl-6">
                             {childCategories.map((sub) => (
-                            <button key={sub.id}>{sub.name}</button>
+                            <button 
+                                key={sub.id} 
+                                onClick={() => setSelectedCategory(sub.id)}
+                            >
+                                {sub.name}
+                            </button>
                             ))}
                         </ul>
                         </div>

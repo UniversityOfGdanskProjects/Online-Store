@@ -10,6 +10,7 @@ import '../styles/home_page.css'
 export default function RootLayout({ children }) {
   const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const hiddenNavigationPaths = ['/login_page', '/registration_page'];
   const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page']
@@ -38,14 +39,14 @@ export default function RootLayout({ children }) {
         </header>
         { showMenu && 
           <header className='menu_header'>
-            <CategoriesMenu />
+            <CategoriesMenu setSelectedCategory={setSelectedCategory} />
           </header>
         }
           <main>
             {children}
             <div className='product_list_layout_hp'>
               { showMenu && showNavigation &&
-                <ProductList searchQuery={searchQuery} />
+                <ProductList searchQuery={searchQuery} selectedCategory={selectedCategory} />
               }
             </div>
           </main>
