@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ProductList = ({ searchQuery, selectedCategory }) => {
+const ProductList = ({ searchQuery, selectedCategory, minPrice, maxPrice, sortOrder }) => {
     const [products, setProducts] = useState([])
     const router = useRouter();
 
@@ -21,10 +21,19 @@ const ProductList = ({ searchQuery, selectedCategory }) => {
         fetchProducts()
     }, [])
 
-    const filteredProducts = products.filter(product => 
+    const filteredProducts = products
+    .filter(product =>
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        (selectedCategory === null || product.category_id === selectedCategory)
+        (selectedCategory === null || product.category_id === selectedCategory) &&
+        (minPrice === null || product.price >= minPrice) &&
+        (maxPrice === null || product.price <= maxPrice)
     )
+    .sort((a, b) => {
+        if (sortOrder === "asc") return a.price - b.price;
+        if (sortOrder === "desc") return b.price - a.price;
+        return 0;
+    });
+
     
 
       return (

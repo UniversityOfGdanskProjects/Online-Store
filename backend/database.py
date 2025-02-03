@@ -224,6 +224,15 @@ class Database:
         cursor.execute("UPDATE products SET name = ?, description = ?, price = ?, stock = ?, category_id = ?, image_url = ?, created_at = ? WHERE id = ?", (name, description, price, stock, category_id, image_url, created_at, product_id))
         self.connection.commit()
         print(f'Modify product {product_id}.')
+
+    def add_opinion(self, user_id, product_id, rating, comment, created_at):
+        pass
+
+    def get_ratin_by_product(self, product_id): 
+        pass
+
+    def get_all_opinions_by_product(self, product_id):
+        pass
     
 if __name__ == "__main__":
     db = Database()

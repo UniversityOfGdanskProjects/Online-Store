@@ -11,6 +11,9 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [minPrice, setMinPrice] = useState(null);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const [sortOrder, setSortOrder] = useState("");
 
   const hiddenNavigationPaths = ['/login_page', '/registration_page'];
   const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product/[id]']
@@ -39,14 +42,25 @@ export default function RootLayout({ children }) {
         </header>
         { showMenu && 
           <header className='menu_header'>
-            <CategoriesMenu setSelectedCategory={setSelectedCategory} />
+            <CategoriesMenu 
+              setSelectedCategory={setSelectedCategory} 
+              setMinPrice={setMinPrice} 
+              setMaxPrice={setMaxPrice} 
+              setSortOrder={setSortOrder} 
+            />
           </header>
         }
           <main>
             {children}
             <div className='product_list_layout_hp'>
               { showMenu && showNavigation &&
-                <ProductList searchQuery={searchQuery} selectedCategory={selectedCategory} />
+                <ProductList 
+                searchQuery={searchQuery} 
+                selectedCategory={selectedCategory} 
+                minPrice={minPrice} 
+                maxPrice={maxPrice} 
+                sortOrder={sortOrder} 
+              />
               }
             </div>
           </main>

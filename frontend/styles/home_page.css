@@ -268,3 +268,65 @@ nav ul li a:hover {
     color: #f4ebe5;
     background-color: #a54912;
 }
+
+.filter_section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #dbb7a68c;
+    color: #a54912;
+    width: 400px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.filter_section label {
+    font-weight: bold;
+    color: #a54912;
+}
+
+.filter_section .flex {
+    display: flex;
+    gap: 10px;
+}
+
+.filter_section input,
+.filter_section select {
+    padding: 8px;
+    border: 1px solid #a54912;
+    border-radius: 5px;
+    background-color: #f4ebe5;
+    color: #a54912;
+    font-size: 14px;
+}
+
+.filter_section input::placeholder {
+    color: #a54912;
+}
+
+.filter_section select {
+    width: 100%;
+}
+
+.filter_section select option {
+    background-color: #f4ebe5;
+    color: #a54912;
+}
+
+.filter_section button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #a54912;
+    background-color: #dbb7a68c;
+    color: #a54912;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.filter_section button:hover {
+    background-color: #f4ebe5;
+    color: #dbb7a68c;
+    border-color: #f4ebe5;
+}
