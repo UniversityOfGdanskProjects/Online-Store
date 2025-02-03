@@ -16,6 +16,24 @@ img{
     width: 270px;
 }
 
+.navigation{
+    display: flex;
+    justify-content: space-around;
+}
+
+.search_input{
+    width: 300px;
+    height: 15.5px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: 2px solid #a54912;
+}
+
+.search_input::placeholder{
+    color: #a54912;
+}
+
 nav {
     height: 40px;
     margin-right: 10px;

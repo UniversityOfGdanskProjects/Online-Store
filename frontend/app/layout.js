@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import Navigation from './components/Navigation';
 import CategoriesMenu from './components/CategoriesMenu';
 import ProductList from './components/ProductListAll';
@@ -8,6 +9,7 @@ import '../styles/home_page.css'
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const hiddenNavigationPaths = ['/login_page', '/registration_page'];
   const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page']
@@ -21,7 +23,18 @@ export default function RootLayout({ children }) {
       <body>
         <header>
           <img src='Logo.png' alt='Logo of my Website' />
-          {showNavigation && <Navigation />} 
+          <div className='navigation'>
+            { showMenu && showNavigation &&
+              <input
+                type="text"
+                placeholder="Wyszukaj produkt..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search_input"
+              />
+            } 
+            {showNavigation && <Navigation />} 
+          </div>
         </header>
         { showMenu && 
           <header className='menu_header'>
@@ -31,7 +44,9 @@ export default function RootLayout({ children }) {
           <main>
             {children}
             <div className='product_list_layout_hp'>
-              <ProductList/>
+              { showMenu && showNavigation &&
+                <ProductList searchQuery={searchQuery} />
+              }
             </div>
           </main>
       </body>

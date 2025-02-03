@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProductList = () => {
+const ProductList = ({ searchQuery }) => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
@@ -19,23 +19,31 @@ const ProductList = () => {
         fetchProducts()
     }, [])
 
-    return (
-        <div className="product_list_div">
-          {products.map((product) => (
-            <div key={product.id} className="product">
-              <img
-                src={product.image_url || "/placeholder.jpg"}
-                className="product_img"
-              />
-              <div className="sapn_layout">
-                <span className="product_name_list">{product.name}</span>
-                <span className="product_name_price">${product.price.toFixed(2)}</span>
-                <div className="button_layout">
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    
+
+      return (
+        <div className="p-4">
+          <div className="product_list_div">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="product">
+                <img
+                  src={product.image_url || "/placeholder.jpg"}
+                  className="product_img"
+                  alt={product.name}
+                />
+                <div className="sapn_layout">
+                  <span className="product_name_list">{product.name}</span>
+                  <span className="product_name_price">${product.price.toFixed(2)}</span>
+                  <div className="button_layout">
                     <button className="add_to_cart_button">+</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       );
 }
