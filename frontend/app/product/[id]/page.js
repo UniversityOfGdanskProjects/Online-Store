@@ -19,6 +19,7 @@ const ProductDetails = () => {
     const [rating, setRating] = useState()
     const [opinion, setOpinion] = useState([])
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [recommendedProducts, setRecommendedProducts] = useState([]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -57,6 +58,19 @@ const ProductDetails = () => {
         }
         
     }
+
+    const fetchRecommendedProducts = async (categoryId) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/admin/get/product`);
+            if (!response.ok) {
+                throw new Error("Błąd pobierania produktów z tej samej kategorii");
+            }
+            const data = await response.json();
+            setRecommendedProducts(data.filter(product => product.id !== cleanId).slice(0, 3)); // Pobierz 3 produkty, z wyjątkiem obecnego
+        } catch (error) {
+            console.error("Błąd:", error);
+        }
+    };
 
     const fetchAllOpinions = async () => {
         try{
@@ -116,6 +130,8 @@ const ProductDetails = () => {
                 }
                 const data = await response.json();
                 setProduct(data);
+
+                fetchRecommendedProducts(data.category_id);
             }catch (error) {
                 console.error("Błąd:", error);
             }
@@ -177,10 +193,35 @@ const ProductDetails = () => {
                 </div>
             </div>
     
+            {recommendedProducts.length > 0 && (
+                <div className="recommended-products">
+                    <h2>Rekomendowane produkty:</h2>
+                    <div className="recommended-products__list">
+                        {recommendedProducts.map((product) => (
+                            <div 
+                                key={product.id} 
+                                className="recommended-product" 
+                                onClick={() => router.push(`/product/${product.id}`)} 
+                                style={{ cursor: "pointer" }}
+                            >
+                                <img
+                                    src={product.image_url || "/placeholder.jpg"}
+                                    className="recommended-product-img"
+                                />
+                                <div className="recommended-product-info">
+                                    <span className="recommended-product-name">{product.name}</span>
+                                    <span className="recommended-product-price">${product.price.toFixed(2)}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+    
             {!isLoggedIn ? (
-                <div>
-                    <p style={{ color: "red" }}>You must be logged in to add a review.</p>
-                    <button onClick={() => router.push('/login_page')}>Login</button>
+                <div className="login-prompt">
+                    <p className="login-prompt__message">You must be logged in to add a review.</p>
+                    <button onClick={() => router.push('/login_page')} className="btn-go-back">Login</button>
                 </div>
             ) : (
                 <Formik
@@ -192,27 +233,27 @@ const ProductDetails = () => {
                     onSubmit={SendJsonToApi}
                 >
                     {({ errors, touched }) => (
-                        <Form>
-                            <div>
-                                <label>Comment</label>
+                        <Form className="review-form">
+                            <div className="review-form__field">
+                                <label htmlFor="comment">Comment</label>
                                 <Field id="comment" name="comment" />
-                                {errors.comment && touched.comment ? (
-                                    <div>{errors.comment}</div>
-                                ) : null}
+                                {errors.comment && touched.comment && (
+                                    <div className="error-message">{errors.comment}</div>
+                                )}
                             </div>
     
-                            <div>
+                            <div className="review-form__field">
                                 <label>Rating</label>
                                 <Field
                                     name="rating"
                                     component={StarRating}
                                 />
-                                {errors.rating && touched.rating ? (
-                                    <div>{errors.rating}</div>
-                                ) : null}
+                                {errors.rating && touched.rating && (
+                                    <div className="error-message">{errors.rating}</div>
+                                )}
                             </div>
     
-                            <button type="submit">Add Opinion</button>
+                            <button type="submit" className="btn-add-to-cart">Add Opinion</button>
                         </Form>
                     )}
                 </Formik>
@@ -234,6 +275,6 @@ const ProductDetails = () => {
             </div>
         </div>
     );    
-};
+}    
 
 export default ProductDetails;
