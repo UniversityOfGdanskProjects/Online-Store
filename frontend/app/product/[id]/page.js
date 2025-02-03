@@ -14,6 +14,7 @@ const schema = yup.object().shape({
 const ProductDetails = () => {
     const router = useRouter()
     const { id } = useParams()
+    const cleanId = id.trim(); 
     const [product, setProduct] = useState(null);
     const [rating, setRating] = useState()
     const [opinion, setOpinion] = useState([])
@@ -36,7 +37,7 @@ const ProductDetails = () => {
 
             console.log("Sending to API:", payload)
 
-            const response = await fetch(`http://localhost:8000/api/user/product/add/review/${id}`, {
+            const response = await fetch(`http://localhost:8000/api/user/product/add/review/${cleanId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -49,13 +50,58 @@ const ProductDetails = () => {
             console.log(result)
 
             resetForm()
-            // fetchAllOpinions()
-
+            fetchAllOpinions()
+            fetchRating()
         } catch (error) {
             console.error('Error sending data to API:', error)
         }
         
     }
+
+    const fetchAllOpinions = async () => {
+        try{
+            const response = await fetch(`http://127.0.0.1:8000/api/user/product/get/opinions/${cleanId}`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+            })
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+            
+            const result = await response.json()
+            console.log("Fetched opinions:", result)
+    
+            setOpinion(result) 
+        } catch (error) {
+            console.error('Error fetching products:', error)
+        }
+    }
+
+    const fetchRating = async () => {
+        try{
+            const response = await fetch(`http://127.0.0.1:8000/api/user/product/get/rating/${cleanId}`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+            })
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+            
+            const result = await response.json()
+            console.log("Fetched rating:", result)
+    
+            setRating(result) 
+        } catch (error) {
+            console.error('Error fetching products:', error)
+        }
+    }
+
+    useEffect(() => {
+        fetchRating()
+        fetchAllOpinions()
+    }, [])
 
     
 
@@ -119,7 +165,10 @@ const ProductDetails = () => {
                 </div>
                 <div className="product-details__info">
                     <p className="product-details__description">{product.description}</p>
-                    <p className="product-details__price">Cena: ${product.price.toFixed(2)}</p>
+                    <p className="product-details__price">
+                        Cena: ${product.price.toFixed(2)} 
+                        {rating && <span> | Ocena: {rating}</span>}
+                    </p>
                     <p className="product-details__stock">Na stanie: {product.stock} szt.</p>
                     <div className="product-details_actions">
                         <button className="btn-add-to-cart">Add To Cart</button>
@@ -127,7 +176,7 @@ const ProductDetails = () => {
                     </div>
                 </div>
             </div>
-
+    
             {!isLoggedIn ? (
                 <div>
                     <p style={{ color: "red" }}>You must be logged in to add a review.</p>
@@ -151,7 +200,7 @@ const ProductDetails = () => {
                                     <div>{errors.comment}</div>
                                 ) : null}
                             </div>
-
+    
                             <div>
                                 <label>Rating</label>
                                 <Field
@@ -162,14 +211,29 @@ const ProductDetails = () => {
                                     <div>{errors.rating}</div>
                                 ) : null}
                             </div>
-
+    
                             <button type="submit">Add Opinion</button>
                         </Form>
                     )}
                 </Formik>
             )}
+    
+            <div className="product-details__opinions">
+                <h2>Opinie:</h2>
+                {opinion.length === 0 ? (
+                    <p>No reviews yet.</p>
+                ) : (
+                    opinion.map((op, index) => (
+                        <div key={index} className="product-details__opinion">
+                            <p><strong>{op.user_name}</strong></p>
+                            <p>Rating: {op.rating}</p>
+                            <p>{op.comment}</p>
+                        </div>
+                    ))
+                )}
+            </div>
         </div>
-    );
+    );    
 };
 
 export default ProductDetails;
