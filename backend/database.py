@@ -260,6 +260,59 @@ class Database:
         result = cursor.fetchall()
         return result if result else []
     
+    def create_order(self, user_id, total_price):
+        cursor = self.connection.cursor()
+        cursor.execute("INSERT INTO orders (user_id, total_price) VALUES (?, ?)", (user_id, total_price))
+        self.connection.commit()
+        return cursor.lastrowid  # Pobiera ID nowo utworzonego zamówienia
+
+    def get_last_inserted_id(self):
+        return self.cursor.lastrowid
+
+    def place_order(self, user_id, cart_items, total_price):
+        cursor = self.connection.cursor()
+        
+        # Dodanie zamówienia
+        cursor.execute("INSERT INTO orders (user_id, total_price) VALUES (?, ?)", (user_id, total_price))
+        order_id = cursor.lastrowid  # Pobranie ID nowego zamówienia
+        
+        # Dodanie produktów do order_items
+        for item in cart_items:
+            cursor.execute(
+                "INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)",
+                (order_id, item['id'], item['quantity'], item['price'])
+            )
+        
+        self.connection.commit()
+        print(f'Złożono zamówienie #{order_id} dla użytkownika {user_id}.')
+        return order_id
+
+    def get_all_orders(self):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM orders")
+        orders = cursor.fetchall()
+        return orders
+
+    def update_order_status(self, order_id, status):
+        cursor = self.connection.cursor()
+        cursor.execute("UPDATE orders SET status = ? WHERE id = ?", (status, order_id))
+        self.connection.commit()
+        print(f'Zaktualizowano status zamówienia #{order_id} na {status}.')
+
+    def add_order_item(self, order_id, product_id, quantity, price):
+        query = """INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)"""
+        cursor = self.connection.cursor()  # Pobierz kursor
+        cursor.execute(query, (order_id, product_id, quantity, price))  # Wykonaj zapytanie
+        self.connection.commit()  # Zatwierdź zmiany
+        print(f'Product with ID {product_id} added to order #{order_id}.')
+
+    def update_product_stock(self, product_id, new_stock):
+        query = """UPDATE products SET stock = ? WHERE id = ?"""
+        cursor = self.connection.cursor()  # Pobierz kursor
+        cursor.execute(query, (new_stock, product_id))  # Wykonaj zapytanie
+        self.connection.commit()  # Zatwierdź zmiany
+        print(f'Product with ID {product_id} stock updated to {new_stock}.')
+           
 if __name__ == "__main__":
     db = Database()
     print("Utworzono bazę danych i tabele.")

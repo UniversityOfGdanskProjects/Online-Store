@@ -243,6 +243,44 @@ def get_all_opinions_for_product(product_id):
     
     return jsonify(result), 200
 
+@app.route('/api/user/order', methods=['POST'])
+def place_order():
+    data = request.get_json()
+    user_email = data.get('user_email')
+    products = data.get('products')  # Lista produktów [{ "product_id": 1, "quantity": 2 }, ...]
+    total_price = 0
+    for item in products:
+        product = db.get_product_by_id(item['product_id'])
+        if not product:  
+            return jsonify({'error': f'Product with ID {item["product_id"]} not found.'}), 404  
+        total_price += item['quantity'] * product['price']  
+
+    if not find_user_email(user_email):
+        return jsonify({'error': f"Account with {user_email} doesn't exist."}), 409
+
+    user_id = db.get_user_id(user_email)
+    if user_id is None:
+        return jsonify({'error': 'User not found.'}), 404
+
+    order_id = db.create_order(user_id, total_price)
+
+    for item in products:
+        product_id = item.get('product_id')
+        quantity = item.get('quantity')
+
+        product = db.get_product_by_id(product_id)
+        if not product:
+            return jsonify({'error': f'Product with ID {product_id} not found.'}), 404
+
+        if product['stock'] < quantity: # Sprawdzenie dostępności w magazynie (stock)
+            return jsonify({'error': f'Not enough stock for product ID {product_id}'}), 400
+
+        db.add_order_item(order_id, product_id, quantity, product['price'])
+        db.update_product_stock(product_id, product['stock'] - quantity)  # Aktualizacja magazynu
+
+    return jsonify({'message': 'Order placed successfully', 'order_id': order_id}), 201
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
