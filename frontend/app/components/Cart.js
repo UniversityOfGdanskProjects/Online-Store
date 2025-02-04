@@ -3,15 +3,17 @@
 import { useCart } from './CartProvider'
 import { ShoppingCart } from 'lucide-react'
 import { useState } from 'react';
+import { useRouter } from "next/navigation"
 
 export default function Cart() {
     const { cart, removeFromCart, total } = useCart();
     const [ isOpen, setIsOpen ] = useState(false)
+    const router = useRouter()
 
     return (
         <div className="cart-wrapper" onMouseEnter={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>
             <div className="cart-icon">
-                <ShoppingCart size={30} color="#a54912" />
+                <ShoppingCart size={20} color="#a54912" />
                 {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
             </div>
             {isOpen && (
@@ -32,6 +34,7 @@ export default function Cart() {
                                 </div>
                             ))}
                             <h3 className="cart-total">Total: ${total}</h3>
+                            <button className='order' onClick={() => router.push('/order')}>Order</button>
                         </div>
                     )}
                 </div>

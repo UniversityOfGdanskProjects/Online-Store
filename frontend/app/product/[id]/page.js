@@ -207,7 +207,7 @@ const ProductDetails = () => {
     
             {recommendedProducts.length > 0 && (
                 <div className="recommended-products">
-                    <h2>Rekomendowane produkty:</h2>
+                    <h2>Recommended products:</h2>
                     <div className="recommended-products__list">
                         {recommendedProducts.map((product) => (
                             <div 
@@ -272,7 +272,7 @@ const ProductDetails = () => {
             )}
     
             <div className="product-details__opinions">
-                <h2>Opinie:</h2>
+                <h2>Opinions:</h2>
                 {opinion.length === 0 ? (
                     <p>No reviews yet.</p>
                 ) : (

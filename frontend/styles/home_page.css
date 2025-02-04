@@ -427,3 +427,19 @@ nav ul li a:hover {
     color: #a54912;
     font-weight: bold;
 }
+
+.order{
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #a54912;
+    background-color: #f4ebe5;
+    color: #a54912;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.order:hover{
+    background-color: #a54912;
+    color: #f4ebe5;
+    border-color: #f4ebe5;
+}

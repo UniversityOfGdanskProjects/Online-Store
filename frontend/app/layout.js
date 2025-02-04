@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navigation from './components/Navigation';
 import CategoriesMenu from './components/CategoriesMenu';
 import ProductList from './components/ProductListAll';
@@ -17,21 +17,26 @@ export default function RootLayout({ children }) {
   const [maxPrice, setMaxPrice] = useState(null);
   const [sortOrder, setSortOrder] = useState("");
 
-  const hiddenNavigationPaths = ['/login_page', '/registration_page'];
-  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product_list/[id]', '/category_list/[id]']
-  const hiddenCart = ['/product/[id]']
+  const hiddenNavigationPaths = ['/login_page', '/registration_page', '/order'];
+  const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product_list/[id]', '/category_list/[id]'];
+
+  // Zakładając, że chcemy mieć koszyk widoczny na wszystkich stronach
+  const hiddenCart = [];
 
   const showMenu = !hiddenCategoryMenu.some(path => 
     pathname.startsWith('/category_list/') || 
     pathname.startsWith('/product_list/') || 
-    pathname === path
+    pathname === path || 
+    pathname.startsWith('/product/')
   );
   const showNavigation = !hiddenNavigationPaths.includes(pathname);
-
-  const showCart = !hiddenCart.some(() => {
-    pathname.startsWith('/product/')
-  })
   
+  const showCart = !hiddenCategoryMenu.some(path => 
+    pathname.startsWith('/category_list/') || 
+    pathname.startsWith('/product_list/') || 
+    pathname === path
+  );
+
   return (
     <CartProvider>
       <html lang="pl">
@@ -43,17 +48,17 @@ export default function RootLayout({ children }) {
               { showMenu && showNavigation &&
                 <input
                   type="text"
-                  placeholder="Wyszukaj produkt..."
+                  placeholder="Search product..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="search_input"
                 />
               } 
               {showNavigation && <Navigation />} 
-              {showMenu && showNavigation && <Cart />}
+              {showCart && showNavigation && <Cart />}
             </div>
           </header>
-          { showMenu && showCart &&
+          { showMenu && showNavigation &&
             <header className='menu_header'>
               <CategoriesMenu 
                 setSelectedCategory={setSelectedCategory} 
@@ -68,12 +73,12 @@ export default function RootLayout({ children }) {
               <div className='product_list_layout_hp'>
                 { showMenu && showNavigation &&
                   <ProductList 
-                  searchQuery={searchQuery} 
-                  selectedCategory={selectedCategory} 
-                  minPrice={minPrice} 
-                  maxPrice={maxPrice} 
-                  sortOrder={sortOrder} 
-                />
+                    searchQuery={searchQuery} 
+                    selectedCategory={selectedCategory} 
+                    minPrice={minPrice} 
+                    maxPrice={maxPrice} 
+                    sortOrder={sortOrder} 
+                  />
                 }
               </div>
             </main>
