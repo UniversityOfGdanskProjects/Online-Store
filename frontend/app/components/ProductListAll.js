@@ -1,9 +1,14 @@
+'use client'
+
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useCart } from "./CartProvider";
+
 
 const ProductList = ({ searchQuery, selectedCategory, minPrice, maxPrice, sortOrder }) => {
     const [products, setProducts] = useState([])
     const router = useRouter();
+    const { addToCart } = useCart()
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -33,9 +38,6 @@ const ProductList = ({ searchQuery, selectedCategory, minPrice, maxPrice, sortOr
         if (sortOrder === "desc") return b.price - a.price;
         return 0;
     });
-
-    
-
       return (
         <div className="p-4">
           <div className="product_list_div">
@@ -54,7 +56,20 @@ const ProductList = ({ searchQuery, selectedCategory, minPrice, maxPrice, sortOr
                   <span className="product_name_list">{product.name}</span>
                   <span className="product_name_price">${product.price.toFixed(2)}</span>
                   <div className="button_layout">
-                    <button className="add_to_cart_button">+</button>
+                    <button 
+                      className="add_to_cart_button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const userEmail = sessionStorage.getItem("email");
+                        if (!userEmail) {
+                          alert("Musisz się zalogować, aby dodać produkt do koszyka!");
+                         return;
+                        }
+                        addToCart(product)
+                    }}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>

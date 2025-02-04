@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from 'next/navigation';
+import { useCart } from "../../components/CartProvider";
 import * as yup from 'yup'
 import { Formik, Field, Form } from "formik";
 
@@ -15,6 +16,7 @@ const ProductDetails = () => {
     const router = useRouter()
     const { id } = useParams()
     const cleanId = id.trim(); 
+    const { addToCart } = useCart()
     const [product, setProduct] = useState(null);
     const [rating, setRating] = useState()
     const [opinion, setOpinion] = useState([])
@@ -187,7 +189,17 @@ const ProductDetails = () => {
                     </p>
                     <p className="product-details__stock">Na stanie: {product.stock} szt.</p>
                     <div className="product-details_actions">
-                        <button className="btn-add-to-cart">Add To Cart</button>
+                        <button className="btn-add-to-cart" onClick={() => {
+                            const userEmail = sessionStorage.getItem("email");
+                            if (!userEmail) {
+                              alert("Musisz się zalogować, aby dodać produkt do koszyka!");
+                             return;
+                            }
+                            addToCart(product)
+                        }}
+                        >
+                            Add To Cart
+                        </button>
                         <button className="btn-go-back" onClick={() => router.push('/')}>Go Back</button>
                     </div>
                 </div>
