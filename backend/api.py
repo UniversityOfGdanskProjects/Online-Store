@@ -280,7 +280,34 @@ def place_order():
 
     return jsonify({'message': 'Order placed successfully', 'order_id': order_id}), 201
 
+@app.route('/api/admin/orders', methods=['GET'])
+def get_all_orders():
+    orders = db.get_all_orders()
+    result = []
+    for order in orders:
+        result.append({
+            'order_id': order[0],
+            'user_id': order[1],
+            'total_price': order[2],
+            'status': order[3],
+            'created_at': order[4]
+        })
+    return jsonify(result), 200
 
+@app.route('/api/admin/orders/<order_id>/status', methods=['PUT'])
+def update_order_status(order_id):
+    data = request.get_json()
+    new_status = data.get('status')
+
+    if new_status is None:
+        return jsonify({'error': 'Status is required.'}), 400
+
+    order = db.get_order_by_id(order_id)
+    if not order:
+        return jsonify({'error': 'Order not found.'}), 404
+
+    db.update_order_status(order_id, new_status)
+    return jsonify({'message': f'Order #{order_id} status updated to {new_status}.'}), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

@@ -59,6 +59,9 @@ function Navigation() {
                         <li>
                             <Link href="/category_list">Category List</Link>
                         </li>
+                        <li>
+                            <Link href="/order_menagment">Order Menagment</Link>
+                        </li>
                     </>
                 )}
                 {!isLoggedIn ? (

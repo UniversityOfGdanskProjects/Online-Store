@@ -1,0 +1,66 @@
+.orders-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 100px;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .order-card {
+    background-color: #dbb7a6;
+    border: 1px solid #a54912;
+    border-radius: 25px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 100%;
+    height: auto;
+  }
+  
+  .order-title {
+    font-size: 24px;
+    color: #a34a12;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .order-info,
+  .order-status {
+    font-family: Arial, sans-serif;
+    margin: 5px 0;
+    word-wrap: break-word;
+  }
+  
+  .status-update {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .status-input {
+    padding: 10px;
+    border: 1px solid #a54912;
+    border-radius: 8px;
+    width: 93%;
+    background-color: #f4ebe5;
+    font-size: 1em;
+  }
+  
+  .update-button {
+    padding: 10px;
+    background-color: #a54912;
+    border: none;
+    color: #f4ebe5;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-size: 1em;
+  }
+  
+  .update-button:hover {
+    background-color: #f4ebe5;
+    border: 1px solid #a54912;
+    color: #a54912;
+  }
+  
