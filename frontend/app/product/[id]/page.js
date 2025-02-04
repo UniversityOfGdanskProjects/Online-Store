@@ -184,10 +184,10 @@ const ProductDetails = () => {
                 <div className="product-details__info">
                     <p className="product-details__description">{product.description}</p>
                     <p className="product-details__price">
-                        Cena: ${product.price.toFixed(2)} 
-                        {rating && <span> | Ocena: {rating}</span>}
+                        Price: ${product.price.toFixed(2)} 
+                        {rating && <span> | Rating: {rating}</span>}
                     </p>
-                    <p className="product-details__stock">Na stanie: {product.stock} szt.</p>
+                    <p className="product-details__stock">In stock: {product.stock} pc.</p>
                     <div className="product-details_actions">
                         <button className="btn-add-to-cart" onClick={() => {
                             const userEmail = sessionStorage.getItem("email");

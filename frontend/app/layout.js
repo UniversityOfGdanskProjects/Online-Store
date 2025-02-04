@@ -20,9 +20,6 @@ export default function RootLayout({ children }) {
   const hiddenNavigationPaths = ['/login_page', '/registration_page', '/order'];
   const hiddenCategoryMenu = ['/add_product', '/add_category', '/product_list', '/category_list', '/admin_home_page', '/product_list/[id]', '/category_list/[id]'];
 
-  // Zakładając, że chcemy mieć koszyk widoczny na wszystkich stronach
-  const hiddenCart = [];
-
   const showMenu = !hiddenCategoryMenu.some(path => 
     pathname.startsWith('/category_list/') || 
     pathname.startsWith('/product_list/') || 

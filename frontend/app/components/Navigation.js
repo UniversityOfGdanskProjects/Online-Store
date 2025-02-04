@@ -1,11 +1,12 @@
 'use client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
+import { useCart } from './CartProvider';
 
 function Navigation() {
     const router = useRouter();
-
+    const { clearCart } = useCart()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState(null);
 
@@ -37,6 +38,7 @@ function Navigation() {
         sessionStorage.removeItem('role');
         setIsLoggedIn(false);
         setRole(null);
+        clearCart()
         router.push('/');
     }
 
