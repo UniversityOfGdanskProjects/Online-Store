@@ -312,6 +312,12 @@ class Database:
         cursor.execute(query, (new_stock, product_id))  # Wykonaj zapytanie
         self.connection.commit()  # Zatwierdź zmiany
         print(f'Product with ID {product_id} stock updated to {new_stock}.')
+
+    def get_order_by_id(self, order_id):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT * FROM orders WHERE id = ?', (order_id, ))
+        order = cursor.fetchone()
+        return order
            
 if __name__ == "__main__":
     db = Database()

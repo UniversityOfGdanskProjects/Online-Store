@@ -14,7 +14,7 @@ export default function OrderPage() {
         if (cart.length === 0) return alert('Your cart is empty!');
 
         setLoading(true);
-        const userEmail = sessionStorage.getItem('email'); // W przyszłości podmień na rzeczywisty e-mail użytkownika
+        const userEmail = sessionStorage.getItem('email'); 
 
         const products = cart.map(item => ({
             product_id: item.id,
@@ -33,7 +33,7 @@ export default function OrderPage() {
             if (response.ok) {
                 alert(`Order placed successfully! Order ID: ${data.order_id}`);
                 clearCart();
-                router.push('/'); // Po zamówieniu przekieruj na stronę główną
+                router.push('/');
             } else {
                 alert(data.error || 'Failed to place order');
             }

@@ -31,7 +31,7 @@ const Login_Page = () => {
             router.push('/')
         } else if (role === "admin") {
             SendJsonToApiAdmin(filteredData, role)
-            router.push('/admin_home_page')
+            router.push('/order_menagment')
         }
     }
 
