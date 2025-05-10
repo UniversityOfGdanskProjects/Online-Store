@@ -1,0 +1,214 @@
+.Login_Page_Div_Layout{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login_Page_Div_Page{
+    display: grid;
+    grid-template-rows:1fr 4fr;
+    gap: 10px;
+    margin-top: 100px;
+    width: 600px;
+    height: 600px;
+    background-color: #dbb7a6;
+    border-radius: 25px;
+    border: 1px solid #dbb7a6;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.login_welcome{
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    color: #a34a12;
+    font-weight: bolder;
+}
+
+.login_form{
+    grid-row: 2;
+    display: grid;
+    grid-template-rows:1fr 1fr 1fr 2fr;
+    gap: 10px;
+}
+.chose_role_div{
+    grid-row: 1;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 40px;
+}
+
+.chose_role_label{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #a34a12;
+    font-weight: bold;
+}
+
+.chose_role_label_div{
+    grid-row: 1;
+    grid-column: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.admin_role_label{
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #a34a12;
+    font-weight: bold;
+}
+
+.admin_role_input{
+    height: 19px;
+    width: 19px;
+    margin-bottom: 2px;
+}
+
+.user_role_label{
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #a34a12;
+    font-weight: bold;
+}
+
+.user_role_input{
+    height: 19px;
+    width: 19px;
+    margin-bottom: 2px;
+}
+
+.chose_role_p{
+    grid-row: 2;
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.email_div{
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 40px;
+}
+
+.email_label{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #a34a12;
+    font-weight: bold;
+}
+
+.email_input{
+    grid-row: 1;
+    grid-column: 2;
+    height: 25px;
+    width: 230px;
+    margin-left: 30px;
+}
+
+.email_p{
+    grid-row: 2;
+    grid-column:1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password_div{
+    grid-row: 3;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    height: 40px;
+}
+
+.password_label{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #a34a12;
+    font-weight: bold;
+}
+
+.password_input{
+    grid-row: 1;
+    grid-column: 2;
+    height: 25px;
+    width: 230px;
+    margin-left: 30px;
+}
+
+.password_p{
+    grid-row: 2;
+    grid-column:1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_layout_login{
+    grid-row: 4;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login_button{
+    background-color: #f4ebe5;
+    border: 2px solid #a54912;
+    border-radius: 15px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #a54912;
+    width: 200px;
+    height: 70px;
+    transition: all 0.3s ease-in-out;
+}
+
+.login_button:hover{
+    background-color: #a54912;
+    border: 2px solid #f4ebe5;
+    color: #f4ebe5;
+}
+
+.go_back_button{
+    background-color: #a54912;
+    border: 2px solid #f4ebe5;
+    border-radius: 15px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #f4ebe5;
+    width: 200px;
+    height: 70px;
+    transition: all 0.3s ease-in-out;
+}
+
+.go_back_button:hover{
+    background-color: #f4ebe5;
+    border: 2px solid #a54912;
+    color: #a54912;
+}

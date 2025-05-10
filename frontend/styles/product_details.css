@@ -1,0 +1,219 @@
+.ProductDetaillsDiv {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    margin-top: 100px;
+    background-color: #e6cec2;
+    padding: 40px; /* Increased padding for a larger background */
+    border-radius: 10px; /* Optionally add rounded corners */
+    color: black;
+}
+
+.product-details__name {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #a34a12;
+}
+
+.product-details__layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.product-details__image-container {
+    flex: 1;
+    max-width: 500px;
+}
+
+.product-details__image {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 300px; /* Updated width */
+    height: 400px; /* Updated height */
+    object-fit: cover;
+    border-radius: 3px;
+    background-color: #dbb7a6;
+}
+
+.product-details__info {
+    flex: 2;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-details__description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.product-details__price,
+.product-details__stock {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.product-details_actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: flex-end;
+    justify-content: space-around;
+    width: 80%;
+    margin-left: 40px;
+}
+
+.btn-add-to-cart, .btn-go-back {
+    background-color: #f4ebe5;
+    border: 2px solid #a54912;
+    color: #a54912;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 200px;
+    height: 50px;
+}
+
+.btn-add-to-cart:hover, .btn-go-back:hover {
+    background-color: #a54912;
+    border: 2px solid #f4ebe5;
+    color: #f4ebe5;
+}
+
+@media (max-width: 768px) {
+    .product-details__layout {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-details__image-container {
+        max-width: 100%;
+    }
+}
+
+/* Recommended Products */
+.recommended-products {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.recommended-products h2 {
+    font-size: 30px;
+    color: #a34a12;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.recommended-products__list {
+    display: flex;
+    flex-wrap: wrap; /* Ensures items wrap when they reach the edge */
+    gap: 20px; /* Adds space between products */
+    justify-content: center; /* Centers items horizontally */
+}
+
+.recommended-product {
+    width: 300px; /* Set the width to 300px to prevent overlap */
+    text-align: center;
+    transition: transform 0.3s ease;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.recommended-product:hover {
+    transform: scale(1.05); /* Increase size on hover */
+}
+
+.recommended-product-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+    background-color: #dbb7a6;
+}
+
+.recommended-product-info {
+    display: flex;
+    justify-content: space-between; /* Distribute name and price */
+    align-items: center;
+    margin-top: 10px;
+}
+
+.recommended-product-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #a34a12;
+    text-align: left; /* Align the name to the left */
+    flex-grow: 1; /* Make the name take the remaining space */
+}
+
+.recommended-product-price {
+    font-size: 1rem;
+    color: #a34a12;
+    text-align: right; /* Align the price to the right */
+}
+
+/* Review Form */
+.review-form {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #f4ebe5;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.review-form__field {
+    margin-bottom: 20px;
+}
+
+.review-form__field label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #a34a12;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* Opinion List */
+.product-details__opinions {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 800px;
+    color: #a34a12;
+}
+
+.product-details__opinion {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f4ebe5;
+    border-radius: 5px;
+}
+
+.product-details__opinion strong {
+    font-size: 1.2rem;
+    color: #a34a12;
+}
+
+.product-details__opinion p {
+    font-size: 1rem;
+    color: #4e4e4e;
+}

@@ -1,0 +1,122 @@
+.product_list_layout{
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Product_List_Page{
+    display: grid;
+    grid-template-rows:1fr auto;
+    gap: 10px;
+    border: 1px solid #dbb7a6;
+    border-radius: 25px;
+    background-color: #dbb7a6;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+    width: 1200px;
+    height: auto;
+    margin-top: 100px;
+}
+
+.Product_List_Welcome{
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    color: #a34a12;
+}
+
+.product_list{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 5px;
+}
+
+.product_table{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.product_table .product_header{
+    display: grid;
+    grid-template-columns: 1fr 2fr repeat(5, 1fr) 1.1fr;
+    gap: 30px;
+    background-color: #f4ebe5;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #f4ebe5;
+}
+
+.product_table .table_row{
+    display: grid;
+    grid-template-columns: 1fr 2fr repeat(5, 1fr) 0.8fr;
+    gap: 30px;
+    padding: 10px;
+    border-bottom: 1px solid #f4ebe5;
+    align-items: center;
+}
+
+.product_table .table_row:nth-child(odd){
+    background-color: #f4ebe5;
+}
+
+.product_table .actions {
+    display: flex;
+    gap: 10px;
+}
+
+.product_table button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #a54912;
+    border: 1px solid #f4ebe5;
+    color: #f4ebe5;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease-in-out;
+}
+
+.product_table button:hover{
+    background-color: #f4ebe5;
+    border: 1px solid #a54912;
+    color: #a54912;
+}
+
+.product_table a{
+    text-decoration: none;
+}
+
+.product_table p{
+    margin: 0; 
+    overflow-wrap: break-word;
+}
+
+.button_div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.add_button{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f4ebe5;
+    border: 2px solid #a54912;
+    font-size: 20px;
+    text-decoration: none;
+    color: #a54912;
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.add_button:hover{
+    background-color: #a54912;
+    border: 2px solid #f4ebe5;
+    color: #f4ebe5;
+}
