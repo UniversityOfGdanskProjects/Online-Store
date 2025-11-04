@@ -1,6 +1,6 @@
 # Online-Store
 
-Projekt typu **sklep internetowy** stworzony przez [MaGawlik2004](https://github.com/MaGawlik2004) w ramach zajęć Uniwersytetu Gdańskiego.  
+Projekt typu **sklep internetowy** stworzony przez [MaGawlik2004](https://github.com/MaGawlik2004) w ramach zajęć z "Frontend Development" na Uniwersytetu Gdańskiego.  
 Aplikacja łączy frontend (React / JS / CSS) z backendem (Python / FastAPI i Flask), tworząc pełnoprawny system e-commerce.
 
 ---
@@ -50,10 +50,6 @@ cd backend
 # Dla Pythona
 pip install -r requirements.txt
 python app.py
-
-# lub dla Node.js
-npm install
-npm run dev
 ```
 
 ### 3️⃣ Uruchomienie frontendu
